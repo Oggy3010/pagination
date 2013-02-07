@@ -1,0 +1,14 @@
+<?php
+$collection = $this->getCollection();
+echo $this->getPagerHtml();
+if ($collection->getData() !== null) : $collection->getSize();// check if there is something in our collection, if yes - show content with pagination  for content
+?>
+    <table>
+        <?php foreach($collection as $value) :?>
+            <tr>
+                <td><h1><?php echo $value->getSku() ?></h1></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+
+<?php endif;

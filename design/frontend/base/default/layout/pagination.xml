@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <pagination_namespace_index_index>
+        <reference name="content">
+            <block type="pagination_namespace/block" name="block"></block><!-- here, we include block file -->
+        </reference>
+    </pagination_namespace_index_index>
+</layout>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Pagination_Namespace>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Pagination_Namespace>
+    </modules>
+</config>
