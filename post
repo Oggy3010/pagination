@@ -20,14 +20,14 @@ In config.xml write this code:
                     <frontName>namespace</frontName>
                 </args>
             </pagination_namespace>
-        </routers>
+        </routers><!-- here creating prefix for link, after domain name it will be first -->
         <layout>
             <updates>
                 <pagination_namespace>
                     <file>pagination.xml</file>
                 </pagination_namespace>
             </updates>
-        </layout>
+        </layout><!-- include layout file -->
     </frontend>
     <global>
         <blocks>
@@ -40,10 +40,10 @@ In config.xml write this code:
                 <class>Pagination_Namespace_Helper</class>
             </pagination_namespace>
         </helpers>
-    </global>
+    </global><!-- in section, including blocks and helpers -->
 </config>
 
-pagination.xml code:
+pagination.xml(layout) code:
 <?xml version="1.0"?>
 <layout>
     <pagination_namespace_index_index>
@@ -53,7 +53,8 @@ pagination.xml code:
     </pagination_namespace_index_index>
 </layout>
 
-On this code "<pagination_namespace_index_index>", we said system path to controller action. And here code of this action:
+On this code "<pagination_namespace_index_index>", we said system path to controller action. 
+And here code of this action in IndexController.php:
 
 <?php
 
@@ -66,8 +67,8 @@ class Pagination_Namespace_IndexController extends Mage_Core_Controller_Front_Ac
     }
 
 }
-
-Block Code:
+Here we just load layout.
+Block Code(Block.php):
 <?php
 
 class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstract
@@ -114,4 +115,4 @@ if ($collection->getData() !== null) : $collection->getSize();// check if there 
     </table>
 <?php endif;
 
-Fter that, go on this URL in your project http://project.com/namespace/
+After that, go on this URL in your project http://project.com/namespace/
