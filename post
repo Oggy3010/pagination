@@ -1,9 +1,11 @@
 Hi. Today we will create pagination for your custom collection.
 At first I would say what it easy, just follow this instruction.
-That's how it will be look out: 
+That's how it will look out: 
 (picture)
-We should have layout,template file in your theme. That two files name will be, for example, "pagination.xml(.phtml).
-In config.xml write this code:
+I hoppe, you allready have your custom module and collection.
+So,lets start.
+
+config.xml:
 <?xml version="1.0"?>
 <config>
     <modules>
@@ -20,7 +22,7 @@ In config.xml write this code:
                     <frontName>namespace</frontName>
                 </args>
             </pagination_namespace>
-        </routers><!-- here creating prefix for link, after domain name it will be first -->
+        </routers><!-- here creating prefix for link, after domain name it will be first word(http://namespacedomain.com/namespace)-->
         <layout>
             <updates>
                 <pagination_namespace>
@@ -40,7 +42,7 @@ In config.xml write this code:
                 <class>Pagination_Namespace_Helper</class>
             </pagination_namespace>
         </helpers>
-    </global><!-- in section, including blocks and helpers -->
+    </global><!-- in global section, including blocks and helpers -->
 </config>
 
 pagination.xml(layout) code:
@@ -68,7 +70,8 @@ class Pagination_Namespace_IndexController extends Mage_Core_Controller_Front_Ac
 
 }
 Here we just load layout.
-Block Code(Block.php):
+
+Block.php(block):
 <?php
 
 class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstract
@@ -76,7 +79,7 @@ class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstra
     protected function _construct()
     {
         parent::_construct();
-        $collection = Mage::getResourceModel('catalog/product_collection');// I hope I you have already own collection
+        $collection = Mage::getResourceModel('catalog/product_collection');// write here your collection
         $this->setCollection($collection);
         $this->setTemplate('namespace/pagination.phtml'); // here we include template to project
     }
@@ -98,21 +101,22 @@ class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstra
     }
 
 }
-And the last step...get it all in template.
+And the last step...template.
 
-template.phtml code:
+pagination.phtml code:
 <?php
 $collection = $this->getCollection();
 echo $this->getPagerHtml();
-if ($collection->getData() !== null) : $collection->getSize();// check if there is something in our collection, if yes - show content with pagination  for content
+if ($collection->getData() !== null) : $collection->getSize();// check if there is something in our collection, if yes - show content with pagination.
 ?>
     <table>
         <?php foreach($collection as $value) :?>
             <tr>
-                <td><h1><?php echo $value->getSku() ?></h1></td>
+                <td><h1><?php echo $value->getName() ?></h1></td>
             </tr>
         <?php endforeach ?>
     </table>
 <?php endif;
 
-After that, go on this URL in your project http://project.com/namespace/
+After that, cleen your cache and go on this URL in your browser http://project.com/namespace/
+If you don't now how cleen cache comforteble and faster, read this post http://www.atwix.com/magento/using-mage-run-to-speed-up-development/

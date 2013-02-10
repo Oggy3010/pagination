@@ -1,24 +1,14 @@
 <?php
 $collection = $this->getCollection();
-echo $this->getToolbarHtml();
 echo $this->getPagerHtml();
-if ($collection->getData() !== null) : $collection->getSize();// check if there is something in our collection, if yes - show content with pagination  for content
+if ($collection->getData() !== null) : $collection->getSize();
 ?>
-    <?php if($this->getMode() == 'list') : ?>
         <table id="pagination-table">
             <?php foreach($collection as $value) :?>
                 <tr>
-                    <td><h1><?php echo $value->getSku() ?></h1></td>
+                    <td><h1><?php echo $value->getName() ?></h1></td>
                 </tr>
             <?php endforeach ?>
         </table>
-    <script type="text/javascript">decorateTable('pagination-table');</script>
-    <?php endif ?>
-
-    <?php if($this->getMode() == 'grid') : ?>
-        <?php foreach($collection as $value) :?>
-            <h1><?php echo $value->getSku() ?></h1><br>
-        <?php endforeach ?>
-    <?php endif ?>
-
+   
 <?php endif;

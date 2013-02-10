@@ -12,14 +12,11 @@ class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstra
 
     protected function _prepareLayout()
     {
-        parent::_prepareLayout();
-        $toolbar = $this->getToolbarBlock();
-        $toolbar->setCollection($collection);
+        parent::_prepareLayout();        
         $pager = $this->getLayout()->createBlock('page/html_pager', 'custom.pager'); // getting core block "pager"
         $pager->setAvailableLimit(array(1=>1,2=>2,3=>3,'all'=>'all')); // set numbering for our pagination
         $pager->setCollection($this->getCollection());
-        $this->setChild('pager', $pager);
-        $this->setChild('toolbar', $toolbar);
+        $this->setChild('pager', $pager);        
         $this->getCollection()->load();
         return $this;
     }
@@ -27,16 +24,6 @@ class Pagination_Namespace_Block_Block extends Mage_Catalog_Block_Product_Abstra
     public function getPagerHtml()
     {
         return $this->getChildHtml('pager'); // we will call this method from template
-    }
-
-    public function getMode()
-    {
-        return $this->getChild('toolbar')->getCurrentMode();
-    }
-
-    public function getToolbarHtml()
-    {
-        return $this->getChildHtml('toolbar');
-    }
+    }    
 
 }
